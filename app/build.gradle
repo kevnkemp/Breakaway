@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.devtools.ksp' version '1.6.10-1.0.2'
@@ -52,6 +53,9 @@ android {
     buildFeatures {
         compose true
     }
+    dataBinding {
+        enabled = true
+    }
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
         kotlinCompilerVersion '1.6.10'
@@ -102,5 +106,7 @@ dependencies {
     implementation "com.google.accompanist:accompanist-swiperefresh:0.24.0-alpha"
     // ConstraintLayout
     implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02"
-
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    // Fragment
+    implementation "androidx.fragment:fragment-ktx:1.4.1"
 }

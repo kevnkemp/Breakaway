@@ -1,39 +1,21 @@
 package com.chaboi.breakaway
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import com.chaboi.breakaway.features.game_schedule.presentation.GameScheduleScreen
-import com.chaboi.breakaway.ui.theme.BreakawayTheme
+import androidx.appcompat.app.AppCompatActivity
+import com.chaboi.breakaway.features.game_schedule.presentation.GameScheduleFragment
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.plant(Timber.DebugTree())
-        setContent {
-            BreakawayTheme {
-                // A surface container using the 'background' color from the theme
-                GameScheduleScreen()
-            }
+        setContentView(R.layout.main_activity)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, GameScheduleFragment())
+                .commitNow()
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    BreakawayTheme {
-        Greeting("Android")
     }
 }

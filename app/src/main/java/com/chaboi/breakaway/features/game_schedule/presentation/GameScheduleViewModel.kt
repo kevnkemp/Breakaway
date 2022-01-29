@@ -1,18 +1,20 @@
 package com.chaboi.breakaway.features.game_schedule.presentation
 
-import androidx.compose.runtime.mutableStateListOf
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cesarferreira.tempo.toDate
+import com.chaboi.breakaway.core.adapter.AdapterItem
 import com.chaboi.breakaway.features.game_schedule.domain.entities.GameFeedEntity
 import com.chaboi.breakaway.features.game_schedule.domain.use_case.FetchGamesForDayUseCase
 import com.chaboi.breakaway.features.game_schedule.domain.entities.GameScheduleEntity
 import com.chaboi.breakaway.features.game_schedule.domain.use_case.FetchLiveGameStatsUseCase
+import com.chaboi.breakaway.features.game_schedule.presentation.items.GameItem
 import com.chaboi.breakaway.util.DATE_FORMAT_UTC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,18 +24,17 @@ class GameScheduleViewModel @Inject constructor(
     private val fetchGamesForDayUseCase: FetchGamesForDayUseCase,
     private val fetchLiveGameStatsUseCase: FetchLiveGameStatsUseCase
 ) : ViewModel() {
-    val gameEntities = mutableStateListOf<GameFeedEntity>()
-    val isRefreshing = MutableStateFlow(true)
+    val gameFeeds: LiveData<List<AdapterItem>>
+        get() = _gameFeeds
+    private val _gameFeeds = MutableLiveData<List<AdapterItem>>(emptyList())
 
     init {
         refreshGames()
     }
 
     fun refreshGames() {
-        isRefreshing.value = true
         viewModelScope.launch {
             fetchGamesForDayUseCase.invoke().collect { games ->
-                gameEntities.clear()
                 getLiveDataForGame(games)
             }
         }
@@ -53,8 +54,16 @@ class GameScheduleViewModel @Inject constructor(
                     feed?.let { feeds.add(feed) }
                 }
             }
-            gameEntities.addAll(feeds.sortedBy { it.gameDate.toDate(DATE_FORMAT_UTC) })
-            isRefreshing.value = false
+            val sortedFeeds = createAdapterList(feeds)
+            _gameFeeds.postValue(sortedFeeds)
         }
+    }
+
+    private fun createAdapterList(gameFeeds: List<GameFeedEntity>): List<AdapterItem> {
+        return gameFeeds
+            .sortedBy { it.gameDate.toDate(DATE_FORMAT_UTC) }
+            .map {
+                GameItem(it)
+            }
     }
 }

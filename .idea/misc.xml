@@ -4,6 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/compose-model-1642882133525.xml" value="0.6064981949458483" />
+        <entry key="../../../../layout/compose-model-1643077013632.xml" value="0.1" />
+        <entry key="../../../../layout/compose-model-1643410334238.xml" value="0.7220216606498195" />
+        <entry key="app/src/main/res/layout/fragment_game_schedule.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/game_item.xml" value="0.2692307692307692" />
+        <entry key="app/src/main/res/layout/main_activity.xml" value="0.1" />
       </map>
     </option>
   </component>
