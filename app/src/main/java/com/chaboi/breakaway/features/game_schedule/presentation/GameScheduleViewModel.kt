@@ -28,11 +28,16 @@ class GameScheduleViewModel @Inject constructor(
         get() = _gameFeeds
     private val _gameFeeds = MutableLiveData<List<AdapterItem>>(emptyList())
 
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+    private val _isLoading = MutableLiveData(false)
+
     init {
         refreshGames()
     }
 
     fun refreshGames() {
+        _isLoading.postValue(true)
         viewModelScope.launch {
             fetchGamesForDayUseCase.invoke().collect { games ->
                 getLiveDataForGame(games)
@@ -56,6 +61,7 @@ class GameScheduleViewModel @Inject constructor(
             }
             val sortedFeeds = createAdapterList(feeds)
             _gameFeeds.postValue(sortedFeeds)
+            _isLoading.postValue(false)
         }
     }
 
