@@ -6,11 +6,12 @@ import com.chaboi.breakaway.features.game_schedule.data.remote.response.schedule
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface GameScheduleService {
 
     @GET("api/v1/schedule")
-    suspend fun getGamesForDay(): ApiResponse<ScheduleResponse>
+    suspend fun getGamesForDay(@Query("date") date: String): ApiResponse<ScheduleResponse>
 
     @GET("api/v1/game/{gamePk}/boxscore")
     suspend fun getGameBoxScore(@Path("gamePk") gamePk: String): ApiResponse<GameBoxScoreResponse>

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface GameScheduleRepositoryContract {
 
-    suspend fun getGameSchedule(): Flow<List<GameScheduleEntity>>
+    suspend fun getGameSchedule(date: String): Flow<List<GameScheduleEntity>>
 
     suspend fun getGameBoxScore(gamePk: String): Flow<GameBoxScoreEntity?>
 

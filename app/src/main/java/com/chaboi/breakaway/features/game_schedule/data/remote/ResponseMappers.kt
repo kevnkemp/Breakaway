@@ -10,7 +10,7 @@ import com.chaboi.breakaway.util.getDateHourMinutesFormat
 
 // TODO remove usage of domain Entity once we have Room model for this
 fun mapGameScheduleResponse(response: ScheduleResponse): List<GameScheduleEntity> {
-    return response.dates.first().games.map {
+    return response.dates.firstOrNull()?.games?.map {
         GameScheduleEntity(
             gamePk = it.gamePk,
             awayTeam = it.teams.away.team.name,
@@ -19,7 +19,7 @@ fun mapGameScheduleResponse(response: ScheduleResponse): List<GameScheduleEntity
             awayScore = it.teams.away.score,
             homeScore = it.teams.home.score
         )
-    }
+    } ?: emptyList()
 }
 
 fun mapGameBoxScoreResponse(gamePk: String, response: GameBoxScoreResponse): GameBoxScoreEntity? {

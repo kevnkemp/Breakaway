@@ -1,8 +1,6 @@
 package com.chaboi.breakaway.features.game_schedule.domain.entities
 
-import com.chaboi.breakaway.util.FINAL
-import com.chaboi.breakaway.util.IN_PROGRESS
-import com.chaboi.breakaway.util.getDateHourMinutesFormat
+import com.chaboi.breakaway.util.*
 
 data class GameFeedEntity(
     val gamePk: String,
@@ -26,4 +24,8 @@ fun GameFeedEntity.getTime(): String {
         IN_PROGRESS -> "${this.timeRemaining} | ${this.period}"
         else -> this.gameDate.getDateHourMinutesFormat()
     }
+}
+
+fun GameFeedEntity.isUpcoming(): Boolean {
+    return this.gameStatus == SCHEDULED || this.gameStatus == PRE_GAME
 }

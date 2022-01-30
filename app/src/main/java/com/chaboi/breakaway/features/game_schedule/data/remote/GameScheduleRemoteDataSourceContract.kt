@@ -7,7 +7,7 @@ import com.skydoves.sandwich.ApiResponse
 
 interface GameScheduleRemoteDataSourceContract {
 
-    suspend fun getGamesForDay(): ApiResponse<ScheduleResponse>
+    suspend fun getGamesForDay(date: String): ApiResponse<ScheduleResponse>
 
     suspend fun getGameBoxScore(gamePk: String): ApiResponse<GameBoxScoreResponse>
 

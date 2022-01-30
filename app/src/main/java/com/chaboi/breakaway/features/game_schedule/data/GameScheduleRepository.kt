@@ -23,9 +23,9 @@ class GameScheduleRepository @Inject constructor(
     private val remoteDataSource: GameScheduleRemoteDataSourceContract
 ) : GameScheduleRepositoryContract {
 
-    override suspend fun getGameSchedule(): Flow<List<GameScheduleEntity>> =
+    override suspend fun getGameSchedule(date: String): Flow<List<GameScheduleEntity>> =
         flow {
-            remoteDataSource.getGamesForDay()
+            remoteDataSource.getGamesForDay(date)
                 .suspendOnSuccess {
                     emit(mapGameScheduleResponse(data))
                 }

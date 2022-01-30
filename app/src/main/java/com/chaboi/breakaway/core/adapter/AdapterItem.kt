@@ -1,6 +1,7 @@
 package com.chaboi.breakaway.core.adapter
 
 import androidx.annotation.LayoutRes
+import androidx.databinding.BaseObservable
 import com.chaboi.breakaway.R
 
 interface AdapterItem {

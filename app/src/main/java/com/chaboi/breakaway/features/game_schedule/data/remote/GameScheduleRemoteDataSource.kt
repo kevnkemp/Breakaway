@@ -10,8 +10,8 @@ class GameScheduleRemoteDataSource @Inject constructor(
     private val gameScheduleService: GameScheduleService
 ) : GameScheduleRemoteDataSourceContract {
 
-    override suspend fun getGamesForDay(): ApiResponse<ScheduleResponse> =
-        gameScheduleService.getGamesForDay()
+    override suspend fun getGamesForDay(date: String): ApiResponse<ScheduleResponse> =
+        gameScheduleService.getGamesForDay(date)
 
     override suspend fun getGameBoxScore(gamePk: String): ApiResponse<GameBoxScoreResponse> =
         gameScheduleService.getGameBoxScore(gamePk)
