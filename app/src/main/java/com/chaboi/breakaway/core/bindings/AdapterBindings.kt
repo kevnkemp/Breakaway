@@ -1,5 +1,7 @@
 package com.chaboi.breakaway.core.bindings
 
+import android.view.GestureDetector
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
@@ -7,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.chaboi.breakaway.core.adapter.AdapterItem
 import com.chaboi.breakaway.core.adapter.BindableAdapter
 
@@ -63,5 +66,15 @@ fun setPositionChangedListener(recyclerView: RecyclerView, listener: InverseBind
 @BindingAdapter("currentPosition")
 fun setCurrentPosition(recyclerView: RecyclerView, position: Int) {
     (recyclerView.layoutManager as LinearLayoutManager).scrollToPosition(position)
+}
+
+@BindingAdapter("viewPagerAdapter")
+fun setViewPagerAdapter(viewPager: ViewPager2, adapter: BindableAdapter) {
+    viewPager.adapter = adapter
+}
+
+@BindingAdapter("pageChangeListener")
+fun setPageChangeListener(viewPager: ViewPager2, listener: ViewPager2.OnPageChangeCallback) {
+    viewPager.registerOnPageChangeCallback(listener)
 }
 

@@ -19,7 +19,7 @@ class GameScheduleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentGameScheduleBinding
+          return FragmentGameScheduleBinding
             .inflate(inflater, container, false)
             .also {
                 it.lifecycleOwner = this

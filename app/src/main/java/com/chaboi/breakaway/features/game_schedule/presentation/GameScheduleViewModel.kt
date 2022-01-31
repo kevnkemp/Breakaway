@@ -3,12 +3,8 @@ package com.chaboi.breakaway.features.game_schedule.presentation
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.cesarferreira.tempo.day
-import com.cesarferreira.tempo.minus
-import com.cesarferreira.tempo.plus
-import com.cesarferreira.tempo.toDate
+import androidx.viewpager2.widget.ViewPager2
+import com.cesarferreira.tempo.*
 import com.chaboi.breakaway.core.adapter.AdapterItem
 import com.chaboi.breakaway.core.adapter.BindableAdapter
 import com.chaboi.breakaway.features.game_schedule.domain.entities.GameFeedEntity
@@ -37,45 +33,115 @@ class GameScheduleViewModel @Inject constructor(
 
     var isLoadingNewDay = false
 
+    private var isSettled = false
+
     var currentDate = MutableLiveData(Date())
 
-    var currentPosition = MutableLiveData(0)
+    var currentPosition = 0
 
-    val scrollListener = object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            val layoutManger = recyclerView.layoutManager as? LinearLayoutManager ?: return
-//            if (dx > 0) { // scroll to the right
-//                if (!isLoadingNewDay) goToNextDay()
-//            } else if (dx < 0) { // scroll to the left
-//                if (!isLoadingNewDay) goToPreviousDay()
+    val pageChangeListener = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            val oldPosition = currentPosition
+            if (oldPosition != position) {
+                val date = currentDate.value ?: Date()
+                if (oldPosition > position) {
+                    val newDate = date.minus(1.day)
+                    refreshGames(newDate)
+                    currentDate.postValue(newDate)
+                } else if (oldPosition < position) {
+                    val newDate = date.plus(1.day)
+                    refreshGames(newDate)
+                    currentDate.postValue(newDate)
+                }
+                currentPosition = position
+            }
+
+            if (position == 0 && adapter.items.size == 1) {
+                val date = currentDate.value
+                date?.let {
+                    prependItem(GameListItem(emptyList(), date.minus(1.day), this@GameScheduleViewModel))
+                    appendItem(GameListItem(emptyList(), date.plus(1.day), this@GameScheduleViewModel))
+                }
+                currentPosition = 1
+                return
+            } else if (position == 0) { // init next pages
+                val date = (adapter.items[position] as? GameListItem)?.date
+                date?.let {
+                    prependItem(GameListItem(emptyList(), date.minus(1.day), this@GameScheduleViewModel))
+                    currentPosition += position + 1
+                }
+            } else if (position == adapter.items.size - 1) {
+                val date = (adapter.items[position] as? GameListItem)?.date
+                date?.let {
+                    appendItem(GameListItem(emptyList(), date.plus(1.day), this@GameScheduleViewModel))
+                }
+            }
+        }
+
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {
+            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+//            if (positionOffset < 0 && position == 0) {
+//                val date = currentDate.value
+//                date?.let {
+//                    prependItem(GameListItem(emptyList(), date.minus(1.day), this@GameScheduleViewModel))
+//                    currentPosition.postValue(position + 1)
+//                }
+//            } else if (positionOffset > 0 && position == adapter.items.size - 1) {
+//                val date = currentDate.value
+//                date?.let {
+//                    appendItem(GameListItem(emptyList(), date.plus(1.day), this@GameScheduleViewModel))
+//                    currentPosition.postValue(position + -1)
+//                }
 //            }
         }
+
+//        override fun onPageScrollStateChanged(state: Int) {
+//            super.onPageScrollStateChanged(state)
+//            if (state == SCROLL_STATE_DRAGGING) {
+//                isSettled = false;
+//            }
+//            if (state == SCROLL_STATE_SETTLING) {
+//                isSettled = true;
+//            }
+//            if (state == SCROLL_STATE_IDLE && !isSettled) {
+//                val position = currentPosition
+//                val date = currentDate.value
+//                if (position == 0) {
+//                    date?.let {
+//                        currentPosition = position + 1
+//                        prependItem(GameListItem(emptyList(), date.minus(1.day), this@GameScheduleViewModel))
+//                    }
+//                } else if (position == adapter.items.size - 1) {
+//                    date?.let {
+//                        appendItem(GameListItem(emptyList(), date.plus(1.day), this@GameScheduleViewModel))
+//                    }
+//                }
+//            }
+//        }
     }
 
     init {
         val date = Date()
-        adapter.updateItems(
-            listOf(
-                GameListItem(emptyList(), date.minus(1.day), this),
-                GameListItem(emptyList(), date, this),
-                GameListItem(emptyList(), date.plus(1.day), this)
-            )
-        )
-        currentPosition.postValue(1)
-        refreshGames(date, 1)
+        adapter.updateItems(listOf(GameListItem(emptyList(), date, this)))
+        refreshGames(date)
     }
 
-    private fun refreshGames(date: Date, index: Int = 0) {
+    private fun refreshGames(date: Date) {
         currentDate.postValue(date)
         viewModelScope.launch {
             fetchGamesForDayUseCase.setup(date).invoke().collect { games ->
-                getLiveDataForGame(index, games)
+                getLiveDataForGame(date, games)
             }
         }
     }
 
     private fun getLiveDataForGame(
-        index: Int,
+        date: Date,
         gameScheduleEntities: List<GameScheduleEntity>
     ) {
         // TODO Move to use case
@@ -92,6 +158,9 @@ class GameScheduleViewModel @Inject constructor(
                 }
             }
             val sortedFeeds = createAdapterList(feeds)
+            val index = adapter.items.indexOfFirst {
+                (it as GameListItem).date.beginningOfDay == date.beginningOfDay
+            }
             val gameList = adapter.items[index] as? GameListItem
             gameList?.updateGames(sortedFeeds)
             isLoadingNewDay = false
@@ -120,36 +189,36 @@ class GameScheduleViewModel @Inject constructor(
 
     fun goToNextDay() {
         val newDate = currentDate.value?.plus(1.day)
-        var position = currentPosition.value ?: return
+        var position = currentPosition
         currentDate.postValue(newDate)
         position++
         if (adapter.items.size == (position + 1)) {
             newDate?.let {
                 adapter.appendItem(GameListItem(emptyList(), newDate.plus(1.day), this))
                 isLoadingNewDay = true
-                refreshGames(newDate, position)
+                refreshGames(newDate)
             }
         }
-        currentPosition.postValue(position)
+        currentPosition = position
     }
 
     fun goToPreviousDay() {
         val newDate = currentDate.value?.minus(1.day)
-        var position = currentPosition.value ?: return
+        var position = currentPosition
         currentDate.postValue(newDate)
         if (position == 1) {
             newDate?.let {
                 position--
-                currentPosition.postValue(position) // go to first item in adapter
+                currentPosition = position // go to first item in adapter
                 position++
                 isLoadingNewDay = true
-                refreshGames(newDate, position)
+                refreshGames(newDate)
                 adapter.prependItem(GameListItem(emptyList(), newDate.minus(1.day), this)) // add new first item
-                currentPosition.postValue(position)
+                currentPosition = position
             }
         } else {
             position--
-            currentPosition.postValue(position)
+            currentPosition = position
         }
     }
 }
