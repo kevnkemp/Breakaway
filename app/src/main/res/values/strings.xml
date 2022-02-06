@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Breakaway</string>
+
+    <string name="no_games_for_day">No games scheduled for the day.</string>
 </resources>

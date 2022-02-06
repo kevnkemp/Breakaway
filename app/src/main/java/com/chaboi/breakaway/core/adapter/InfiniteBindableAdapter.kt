@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.chaboi.breakaway.BR
 import com.chaboi.breakaway.core.util.prepend
 import com.chaboi.breakaway.core.util.update
 
-class BindableAdapter : RecyclerView.Adapter<BindableViewHolder>() {
+class InfiniteBindableAdapter : RecyclerView.Adapter<BindableViewHolder>() {
     var items: MutableList<AdapterItem> = mutableListOf()
+    val firstElementPosition = INITIAL_POSITION
     private val viewTypeToLayoutId: MutableMap<Int, Int> = mutableMapOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindableViewHolder {
@@ -31,7 +31,7 @@ class BindableAdapter : RecyclerView.Adapter<BindableViewHolder>() {
         return item.viewType
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount() = if (items.isNotEmpty()) 1000 else 0
 
     override fun onBindViewHolder(holder: BindableViewHolder, position: Int) {
         holder.bind(items[position])
@@ -57,13 +57,5 @@ class BindableAdapter : RecyclerView.Adapter<BindableViewHolder>() {
     fun replaceItem(index: Int, item: AdapterItem) {
         items[index] = item
         notifyItemChanged(index)
-    }
-}
-
-class BindableViewHolder(
-    private val binding: ViewDataBinding
-) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(adapterItem: AdapterItem) {
-        binding.setVariable(BR.item, adapterItem)
     }
 }

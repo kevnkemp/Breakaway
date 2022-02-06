@@ -10,7 +10,8 @@
         <entry key="app/src/main/res/drawable/arrow_backward.xml" value="0.109" />
         <entry key="app/src/main/res/drawable/arrow_forward.xml" value="0.109" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.109" />
-        <entry key="app/src/main/res/layout/fragment_game_schedule.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/empty_item.xml" value="0.2520833333333333" />
+        <entry key="app/src/main/res/layout/fragment_game_schedule.xml" value="0.16049382716049382" />
         <entry key="app/src/main/res/layout/game_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/game_list_item.xml" value="0.2520833333333333" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.1" />
