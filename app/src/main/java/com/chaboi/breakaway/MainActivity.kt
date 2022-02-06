@@ -2,7 +2,9 @@ package com.chaboi.breakaway
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.chaboi.breakaway.features.game_schedule.presentation.GameScheduleFragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -12,10 +14,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Timber.plant(Timber.DebugTree())
         setContentView(R.layout.main_activity)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, GameScheduleFragment())
-                .commitNow()
-        }
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val navController = findNavController(R.id.container)
+        bottomNavigationView.setupWithNavController(navController)
     }
 }

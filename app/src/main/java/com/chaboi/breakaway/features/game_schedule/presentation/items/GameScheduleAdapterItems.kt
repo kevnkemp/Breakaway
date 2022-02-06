@@ -18,7 +18,7 @@ class GameListItem(
     games: List<AdapterItem>,
     val date: Date,
     val position: Int,
-    private val callback: GameScheduleViewModelCallback
+    private val callback: ScoresViewModelCallback
 ) : BaseObservable(), AdapterItem {
     override val layoutId = R.layout.game_list_item
     override val viewType = GameScheduleItemType.GAME_LIST.ordinal

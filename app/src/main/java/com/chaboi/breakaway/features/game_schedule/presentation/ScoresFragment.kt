@@ -6,24 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.chaboi.breakaway.databinding.FragmentGameScheduleBinding
+import com.chaboi.breakaway.databinding.FragmentScoresBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GameScheduleFragment : Fragment() {
+class ScoresFragment : Fragment() {
 
-    private val gameScheduleViewModel: GameScheduleViewModel by viewModels()
+    private val scoresViewModel: ScoresViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-          return FragmentGameScheduleBinding
+          return FragmentScoresBinding
             .inflate(inflater, container, false)
             .also {
                 it.lifecycleOwner = this
-                it.viewModel = gameScheduleViewModel
+                it.viewModel = scoresViewModel
             }.root
     }
 }

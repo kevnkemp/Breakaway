@@ -9,12 +9,18 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.109" />
         <entry key="app/src/main/res/drawable/arrow_backward.xml" value="0.109" />
         <entry key="app/src/main/res/drawable/arrow_forward.xml" value="0.109" />
+        <entry key="app/src/main/res/drawable/ic_hockey_rink.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.109" />
         <entry key="app/src/main/res/layout/empty_item.xml" value="0.2520833333333333" />
+        <entry key="app/src/main/res/layout/fragment_discover.xml" value="0.14114583333333333" />
         <entry key="app/src/main/res/layout/fragment_game_schedule.xml" value="0.16049382716049382" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.14114583333333333" />
+        <entry key="app/src/main/res/layout/fragment_standings.xml" value="0.14114583333333333" />
+        <entry key="app/src/main/res/layout/fragment_stats.xml" value="0.14114583333333333" />
         <entry key="app/src/main/res/layout/game_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/game_list_item.xml" value="0.2520833333333333" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.12604166666666666" />
       </map>
     </option>
   </component>

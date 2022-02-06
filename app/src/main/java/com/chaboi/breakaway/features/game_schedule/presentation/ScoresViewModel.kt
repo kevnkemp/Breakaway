@@ -17,17 +17,17 @@ import com.chaboi.breakaway.features.game_schedule.domain.use_case.FetchLiveGame
 import com.chaboi.breakaway.features.game_schedule.presentation.items.EmptyItem
 import com.chaboi.breakaway.features.game_schedule.presentation.items.GameItem
 import com.chaboi.breakaway.features.game_schedule.presentation.items.GameListItem
-import com.chaboi.breakaway.features.game_schedule.presentation.items.GameScheduleViewModelCallback
+import com.chaboi.breakaway.features.game_schedule.presentation.items.ScoresViewModelCallback
 import com.chaboi.breakaway.util.DATE_FORMAT_UTC
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class GameScheduleViewModel @Inject constructor(
+class ScoresViewModel @Inject constructor(
     private val fetchGamesForDayUseCase: FetchGamesForDayUseCase,
     private val fetchLiveGameStatsUseCase: FetchLiveGameStatsUseCase
-) : ViewModel(), GameScheduleViewModelCallback {
+) : ViewModel(), ScoresViewModelCallback {
 
     val adapter = InfiniteBindableAdapter()
 
@@ -102,6 +102,8 @@ class GameScheduleViewModel @Inject constructor(
     private fun updateItemWithNoGames(date: Date, position: Int) {
         if (adapter.items[position] !is GameListItem) {
             adapter.replaceItem(position, GameListItem(emptyList(), date, position, this))
+            (adapter.items[position] as GameListItem).updateGames(emptyList())
+        } else {
             (adapter.items[position] as GameListItem).updateGames(emptyList())
         }
     }

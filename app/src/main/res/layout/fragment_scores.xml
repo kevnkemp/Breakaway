@@ -8,7 +8,7 @@
         <import type="com.chaboi.breakaway.util.DateUtilsKt" />
         <variable
             name="viewModel"
-            type="com.chaboi.breakaway.features.game_schedule.presentation.GameScheduleViewModel" />
+            type="com.chaboi.breakaway.features.game_schedule.presentation.ScoresViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
