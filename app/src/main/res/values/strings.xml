@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">Breakaway</string>
 
+    <!-- Begin section Scores -->
     <string name="no_games_for_day">No games scheduled for the day.</string>
+    <!-- End section Scores -->
+
+    <!-- Begin section Bottom Nav -->
+    <string name="home">Home</string>
+    <string name="standings">Standings</string>
+    <string name="stats">Stats</string>
+    <string name="discover">Discover</string>
+    <string name="scores">Scores</string>
+    <!-- End section Bottom Nav -->
 </resources>

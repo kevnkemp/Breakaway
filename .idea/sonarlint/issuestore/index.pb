@@ -1,8 +1,6 @@
 
 <
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
-P
- app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
 X
 (gradle/wrapper/gradle-wrapper.properties,f/b/fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
 A
@@ -48,8 +46,6 @@ Napp/src/main/java/com/chaboi/breakaway/core/adapter/InfiniteBindableAdapter.kt
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 >
 app/.gitignore,5/1/51e1c5d383dfaa35e0e7e5873a0a99355a86880f
-å
-\app/src/main/java/com/chaboi/breakaway/features/game_schedule/presentation/ScoresFragment.kt,e/4/e41a72ee53c9232f685069a532bac7ff1853ff51
 v
 Fapp/src/main/java/com/chaboi/breakaway/features/stats/StatsFragment.kt,3/c/3c1e5563497b72909187325b98e45e041c703327
 õ
@@ -64,8 +60,6 @@ Dapp/src/main/java/com/chaboi/breakaway/features/home/HomeFragment.kt,e/1/e1f9a
 Lapp/src/main/java/com/chaboi/breakaway/features/discover/DiscoverFragment.kt,4/5/456dce44d403356dced15abc9265aeba8c6252ae
 v
 Fapp/src/main/java/com/chaboi/breakaway/core/adapter/BindableAdapter.kt,7/5/7528e5d70dce3021455e82158a7e542463d53118
-f
-6app/src/main/java/com/chaboi/breakaway/MainActivity.kt,c/7/c79e539abcec30722706d4533ecdf4e92e860f55
 è
 _app/src/main/java/com/chaboi/breakaway/features/game_schedule/domain/entities/GameFeedEntity.kt,c/d/cdccac183c7913e63f795607268fe518f99b6bcf
 å

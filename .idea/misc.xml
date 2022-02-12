@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.109" />
         <entry key="app/src/main/res/drawable/arrow_backward.xml" value="0.109" />
         <entry key="app/src/main/res/drawable/arrow_forward.xml" value="0.109" />
+        <entry key="app/src/main/res/drawable/discover_nav_icon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/home_nav_icon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_bars.xml" value="0.121" />
         <entry key="app/src/main/res/drawable/ic_bars_selected.xml" value="0.121" />
@@ -16,11 +17,18 @@
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.121" />
         <entry key="app/src/main/res/drawable/ic_hockey_rink.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_hockey_rink_selected.xml" value="0.121" />
+        <entry key="app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home_foreground.xml" value="0.121" />
         <entry key="app/src/main/res/drawable/ic_home_selected.xml" value="0.121" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.109" />
+        <entry key="app/src/main/res/drawable/ic_numbered_list.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_numbered_list_selected.xml" value="0.121" />
+        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_search_selected.xml" value="0.121" />
+        <entry key="app/src/main/res/drawable/nav_menu_item_text.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/scores_nav_icon.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/standings_nav_icon.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/stats_nav_icon.xml" value="0.1" />
         <entry key="app/src/main/res/layout/empty_item.xml" value="0.2520833333333333" />
         <entry key="app/src/main/res/layout/fragment_discover.xml" value="0.14114583333333333" />
         <entry key="app/src/main/res/layout/fragment_game_schedule.xml" value="0.16049382716049382" />
