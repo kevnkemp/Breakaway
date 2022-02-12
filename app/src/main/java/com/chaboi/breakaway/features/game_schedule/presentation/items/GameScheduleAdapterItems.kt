@@ -5,6 +5,7 @@ import androidx.databinding.Bindable
 import com.chaboi.breakaway.BR
 import com.chaboi.breakaway.R
 import com.chaboi.breakaway.core.adapter.AdapterItem
+import com.chaboi.breakaway.core.util.EMPTY_STRING
 import com.chaboi.breakaway.features.game_schedule.domain.entities.GameFeedEntity
 import java.util.*
 import kotlin.properties.Delegates
@@ -12,6 +13,20 @@ import kotlin.properties.Delegates
 class GameItem(val game: GameFeedEntity) : BaseObservable(), AdapterItem {
     override val layoutId = R.layout.game_item
     override val viewType = GameScheduleItemType.GAME.ordinal
+
+    @get:Bindable
+    var homeImageUrl by Delegates.observable(getLogoUrl(game.homeTeamId)) { _, _, _ ->
+        notifyPropertyChanged(BR.homeImageUrl)
+    }
+
+    @get:Bindable
+    var awayImageUrl by Delegates.observable(getLogoUrl(game.awayTeamId)) { _, _, _ ->
+       notifyPropertyChanged(BR.awayImageUrl)
+    }
+
+    private fun getLogoUrl(teamId: Long): String {
+        return "https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${teamId}.svg"
+    }
 }
 
 class GameListItem(

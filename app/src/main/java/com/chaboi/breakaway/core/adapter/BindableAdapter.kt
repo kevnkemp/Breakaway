@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.chaboi.breakaway.BR
-import com.chaboi.breakaway.core.util.prepend
 import com.chaboi.breakaway.core.util.update
 
 class BindableAdapter : RecyclerView.Adapter<BindableViewHolder>() {
@@ -40,23 +39,8 @@ class BindableAdapter : RecyclerView.Adapter<BindableViewHolder>() {
     fun updateItems(newItems: List<AdapterItem>?) {
         newItems?.let {
             items.update(newItems)
-            notifyDataSetChanged()
+            notifyItemRangeChanged(0, newItems.size - 1)
         }
-    }
-
-    fun appendItem(item: AdapterItem) {
-        items.add(item)
-        notifyItemInserted(items.size - 1)
-    }
-
-    fun prependItem(item: AdapterItem) {
-        items.prepend(item)
-        notifyItemInserted(0)
-    }
-
-    fun replaceItem(index: Int, item: AdapterItem) {
-        items[index] = item
-        notifyItemChanged(index)
     }
 }
 

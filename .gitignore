@@ -14,3 +14,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# added by me
+/.idea/sonarlint
+*.pb

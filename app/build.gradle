@@ -115,7 +115,7 @@ dependencies {
     // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
-
-
-
+    // Coil
+    implementation "io.coil-kt:coil:1.4.0"
+    implementation "io.coil-kt:coil-svg:1.4.0"
 }
