@@ -38,8 +38,13 @@ class BindableAdapter : RecyclerView.Adapter<BindableViewHolder>() {
 
     fun updateItems(newItems: List<AdapterItem>?) {
         newItems?.let {
+            val oldSize = items.size
             items.update(newItems)
-            notifyItemRangeChanged(0, newItems.size - 1)
+            if (newItems.size == oldSize) {
+                notifyItemRangeChanged(0, newItems.size)
+            } else {
+                notifyDataSetChanged()
+            }
         }
     }
 }

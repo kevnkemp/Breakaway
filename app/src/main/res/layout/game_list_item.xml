@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.chaboi.breakaway.features.game_schedule.presentation.items.GameListItem" />
+            type="com.chaboi.breakaway.features.scores.presentation.items.GameListItem" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

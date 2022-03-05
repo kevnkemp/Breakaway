@@ -17,4 +17,5 @@ local.properties
 
 # added by me
 /.idea/sonarlint
+.idea/
 *.pb

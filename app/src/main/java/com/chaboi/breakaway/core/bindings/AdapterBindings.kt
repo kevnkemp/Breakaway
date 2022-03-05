@@ -1,8 +1,10 @@
 package com.chaboi.breakaway.core.bindings
 
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.viewpager2.widget.ViewPager2
 import com.chaboi.breakaway.core.adapter.AdapterItem
 import com.chaboi.breakaway.core.adapter.BindableAdapter
@@ -14,14 +16,23 @@ fun bindItems(recyclerView: RecyclerView, items: List<AdapterItem>?) {
     adapter.updateItems(items)
 }
 
+@BindingAdapter("itemAnimator")
+fun setItemAnimator(recyclerView: RecyclerView, shouldSet: Boolean) {
+    if (shouldSet) {
+        recyclerView.itemAnimator = object : DefaultItemAnimator() {
+            override fun canReuseUpdatedViewHolder(viewHolder: RecyclerView.ViewHolder): Boolean {
+                return true
+            }
+        }
+    }
+}
+
 private fun getOrCreateAdapter(recyclerView: RecyclerView): BindableAdapter {
     return if (recyclerView.adapter != null || recyclerView.adapter is BindableAdapter) {
         recyclerView.adapter as BindableAdapter
     } else {
         val bindableAdapter = BindableAdapter()
         recyclerView.adapter = bindableAdapter
-        val snapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(recyclerView)
         bindableAdapter
     }
 }

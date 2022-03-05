@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scores_nav"
+    app:startDestination="@id/scores">
+
+    <fragment
+        android:id="@+id/scores"
+        android:name="com.chaboi.breakaway.features.scores.presentation.ScoresFragment"
+        android:label="Scores Fragment" >
+        <action
+            android:id="@+id/action_scoresFragment_to_scoreDetailsFragment"
+            app:destination="@id/scoreDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/scoreDetailsFragment"
+        android:name="com.chaboi.breakaway.features.scores.presentation.ScoreDetailsFragment"
+        android:label="Scores" >
+        <argument
+            android:name="gamePk"
+            app:argType="string" />
+    </fragment>
+
+</navigation>
