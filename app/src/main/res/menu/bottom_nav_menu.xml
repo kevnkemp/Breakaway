@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home"
+        android:title="@string/home"
+        android:icon="@drawable/home_nav_icon"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/stats"
+        android:title="@string/stats"
+        android:icon="@drawable/stats_nav_icon"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/scores"
+        android:title="@string/scores"
+        android:icon="@drawable/scores_nav_icon"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/standings"
+        android:title="@string/standings"
+        android:icon="@drawable/standings_nav_icon"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/discover"
+        android:title="@string/discover"
+        android:icon="@drawable/discover_nav_icon"
+        app:showAsAction="always"/>
+</menu>

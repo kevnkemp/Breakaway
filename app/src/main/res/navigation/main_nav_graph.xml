@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/scores">
+    <fragment
+        android:id="@+id/discover"
+        android:name="com.chaboi.breakaway.features.discover.DiscoverFragment"
+        android:label="Discover" />
+    <fragment
+        android:id="@+id/home"
+        android:name="com.chaboi.breakaway.features.home.HomeFragment"
+        android:label="Home" />
+    <fragment
+        android:id="@+id/scores"
+        android:name="com.chaboi.breakaway.features.scores.presentation.ScoresFragment"
+        android:label="Scores" />
+    <fragment
+        android:id="@+id/stats"
+        android:name="com.chaboi.breakaway.features.stats.StatsFragment"
+        android:label="Stats" />
+    <fragment
+        android:id="@+id/standings"
+        android:name="com.chaboi.breakaway.features.standings.StandingsFragment"
+        android:label="Standings" />
+
+    <include app:graph="@navigation/scores" />
+
+</navigation>
